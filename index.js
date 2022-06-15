@@ -4,7 +4,7 @@ const app = express()
 
 app.use(express.json())
 app.use('/api/restaurants', restaurants);
-require('./startup/prod')()
+// require('./startup/prod')()
 
 app.get('/', (req, res) => {
     res.send('Hello World')
