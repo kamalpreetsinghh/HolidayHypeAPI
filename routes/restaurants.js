@@ -1,19 +1,33 @@
-const express = require('express');
-const router = express.Router();
+const Restaurant = require('../models/restaurant')
+const express = require('express')
+const router = express.Router()
 
 const restaurants = [
   { id: 1, name: 'Action' },  
   { id: 2, name: 'Horror' },  
   { id: 3, name: 'Romance' },  
-];
+]
 
 router.get('/', (req, res) => {
-  res.send(restaurants);
-});
+  const restaurant = new Restaurant({
+    title: 'Ministry Of Beer',
+    description: 'Sector 29 Gurgaon',
+    imgSrc: 'qwerty',
+    restaurantType: 'Bar',
+    latitude: '23.45',
+    longitude: '45.56' 
+  })
+
+  restaurant.save()
+    .then((result) => {
+      Restaurant.find().then((result) => res.send(result))
+    })
+    .catch((error) => console.log(error))
+})
 
 router.post('/', (req, res) => {
-  const { error } = validateRestaurant(req.body); 
-  if (error) return res.status(400).send(error.details[0].message);
+  const { error } = validateRestaurant(req.body)
+  if (error) return res.status(400).send(error.details[0].message)
 
   const restaurant = {
     id: genres.length + 1,
@@ -58,4 +72,4 @@ function validateRestaurant(restaurant) {
   return Joi.validate(restaurant, schema);
 }
 
-module.exports = router;
+module.exports = router
