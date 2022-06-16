@@ -25,6 +25,14 @@ const restaurantSchema = new Schema({
     longitude: {
         type: String,
         required: true
+    },
+    address: {
+        type: String,
+        required: true
+    },
+    phone: {
+        type: String,
+        required: true
     }
 })
 

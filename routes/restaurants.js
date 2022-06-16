@@ -9,19 +9,40 @@ const restaurants = [
 ]
 
 router.get('/', (req, res) => {
+  Restaurant.find()
+    .then((result) => {
+      let restaurants = []
+      result.forEach(restaurant => {
+        let restrauntDetails = {
+          id: restaurant.id,
+          title: restaurant.title,
+          description: restaurant.description,
+          imgSrc: restaurant.imgSrc,
+          restaurantType: restaurant.restaurantType,
+          latitude: restaurant.latitude,
+          longitude: restaurant.longitude
+        }
+        restaurants.push(restrauntDetails)
+      });
+      res.send(restaurants)
+    })
+    .catch((error) => console.log(error))
+})
+
+router.post('/insert', (req, res) => {
   const restaurant = new Restaurant({
     title: 'Ministry Of Beer',
     description: 'Sector 29 Gurgaon',
     imgSrc: 'qwerty',
     restaurantType: 'Bar',
     latitude: '23.45',
-    longitude: '45.56' 
+    longitude: '45.56',
+    address: 'Near Vancouver Island',
+    phone: '2345678901'
   })
 
   restaurant.save()
-    .then((result) => {
-      Restaurant.find().then((result) => res.send(result))
-    })
+    .then((result) => res.status(200).send('Data Saved Successfully'))
     .catch((error) => console.log(error))
 })
 

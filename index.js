@@ -1,4 +1,5 @@
 const restaurants = require('./routes/restaurants');
+const restrauntDetails = require('./routes/restaurantDetails')
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
@@ -10,6 +11,8 @@ mongoose.connect(dbURL)
 
 app.use(express.json())
 app.use('/api/restaurants', restaurants);
+app.use('/api/restaurantdetails', restrauntDetails);
+
 // require('./startup/prod')()
 
 app.get('/', (req, res) => {
