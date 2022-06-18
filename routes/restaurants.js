@@ -1,59 +1,46 @@
 const Restaurant = require('../models/restaurant')
+const restaurants = require('../data/filteredRestraunts')
 const express = require('express')
 const router = express.Router()
-
-const restaurants = [
-  { id: 1, name: 'Action' },  
-  { id: 2, name: 'Horror' },  
-  { id: 3, name: 'Romance' },  
-]
 
 router.get('/', (req, res) => {
   Restaurant.find()
     .then((result) => {
       let restaurants = []
+      let restaurantDetails = {}
+
       result.forEach(restaurant => {
-        let restrauntDetails = {
-          id: restaurant.id,
-          title: restaurant.title,
-          description: restaurant.description,
-          imgSrc: restaurant.imgSrc,
-          restaurantType: restaurant.restaurantType,
-          latitude: restaurant.latitude,
-          longitude: restaurant.longitude
-        }
-        restaurants.push(restrauntDetails)
+        const { id, title, description, imgSrc, restaurantType, latitude, longitude } = restaurant
+        restaurantDetails = { id, title, description, imgSrc, restaurantType, latitude, longitude }
+
+        restaurants.push(restaurantDetails)
       });
       res.send(restaurants)
     })
     .catch((error) => console.log(error))
 })
 
-router.post('/insert', (req, res) => {
-  const restaurant = new Restaurant({
-    title: 'Ministry Of Beer',
-    description: 'Sector 29 Gurgaon',
-    imgSrc: 'qwerty',
-    restaurantType: 'Bar',
-    latitude: '23.45',
-    longitude: '45.56',
-    address: 'Near Vancouver Island',
-    phone: '2345678901'
-  })
+// router.post('/insert', (req, res) => {
 
-  restaurant.save()
-    .then((result) => res.status(200).send('Data Saved Successfully'))
-    .catch((error) => console.log(error))
-})
+//   restaurants.forEach(restaurant => {
+//     const restaurantDocument = new Restaurant({ title, description, imgSrc, 
+//       restaurantType, latitude, longitude, address, phone } = restaurant)
+
+//     restaurantDocument.save()
+//       .then((result) => console.log(result))
+//       .catch((error) => console.log(error))
+//   });
+
+//   res.send("Data Saved Successfully")
+
+// })
 
 router.post('/', (req, res) => {
-  const { error } = validateRestaurant(req.body)
-  if (error) return res.status(400).send(error.details[0].message)
-
   const restaurant = {
     id: genres.length + 1,
     name: req.body.name
   };
+
   restaurants.push(genre);
   res.send(restaurant);
 });
@@ -62,9 +49,6 @@ router.put('/:id', (req, res) => {
   const restaurant = restaurants.find(c => c.id === parseInt(req.params.id));
   if (!restaurant) return res.status(404).send('The restaurant with the given ID was not found.');
 
-  const { error } = validateRestaurant(req.body); 
-  if (error) return res.status(400).send(error.details[0].message);
-  
   restaurant.name = req.body.name; 
   res.send(restaurant);
 });
@@ -85,12 +69,45 @@ router.get('/:id', (req, res) => {
   res.send(restaurant);
 });
 
-function validateRestaurant(restaurant) {
-  const schema = {
-    name: Joi.string().min(3).required()
-  };
+function filterRestaurants(restaurants) {
+  let category = ''
+  let isSameCategory = false
+  let filteredRestaurants = []
 
-  return Joi.validate(restaurant, schema);
+  restaurants.forEach (restaurant => {
+    if (restaurant.Category != category) {
+      let restaurantDetails = {}
+      category = restaurant.Category
+      isSameCategory = true
+
+      restaurantDetails.restaurantType = restaurant.Category
+      restaurantDetails.title = restaurant['Restaurant Name']
+      restaurantDetails.imgSrc = restaurant['Restaurant Yelp URL']
+      restaurantDetails.latitude = restaurant['Restaurant Latitude']
+      restaurantDetails.longitude = restaurant['Restaurant Longitude']
+      restaurantDetails.address = restaurant['Restaurant Address']
+      restaurantDetails.phone = restaurant['Restaurant Phone']
+
+      restaurantDetails.description = `${restaurantDetails.title} serves deliciuos and authentic ${restaurantDetails.restaurantType} food. We are located at ${restaurantDetails.address} and you can contact us on ${restaurantDetails.phone}`
+
+      filteredRestaurants.push(restaurantDetails)
+    } else if (restaurant.Category == category && isSameCategory == true) {
+      let restaurantDetails = {}
+      isSameCategory = false
+      restaurantDetails.restaurantType = restaurant.Category
+      restaurantDetails.title = restaurant['Restaurant Name']
+      restaurantDetails.imgSrc = restaurant['Restaurant Yelp URL']
+      restaurantDetails.latitude = restaurant['Restaurant Latitude']
+      restaurantDetails.longitude = restaurant['Restaurant Longitude']
+      restaurantDetails.address = restaurant['Restaurant Address']
+      restaurantDetails.phone = restaurant['Restaurant Phone']
+
+      restaurantDetails.description = `${restaurantDetails.title} serves deliciuos and authentic ${restaurantDetails.restaurantType} food. We are located at ${restaurantDetails.address} and you can contact us on ${restaurantDetails.phone}`
+      filteredRestaurants.push(restaurantDetails)
+    }
+  });
+
+  return filteredRestaurants
 }
 
 module.exports = router
