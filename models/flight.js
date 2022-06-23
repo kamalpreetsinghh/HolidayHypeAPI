@@ -6,35 +6,39 @@ const flightSchema = new Schema({
         type: String,
         required: true
     },
-    from: {
+    flightNumber: {
         type: String,
         required: true
     },
-    to: {
-        type: String,
-        required: true
-    },
+    // from: {
+    //     type: String,
+    //     required: true
+    // },
+    // to: {
+    //     type: String,
+    //     required: true
+    // },
     departureTiming: {
-        type: Date,
+        type: String,
         required: true
     },
     landingTiming: {
-        type: Date,
+        type: String,
         required: true
     },
     totalTiming: {
-        type: Date,
+        type: String,
         required: true
     },
-    date: {
-        type: Date,
-        required: true
-    },
+    // date: {
+    //     type: Date,
+    //     required: true
+    // },
     fare: {
         type: Number,
         required: true
     },
-    type: {
+    stops: {
         type: String,
         required: true
     },

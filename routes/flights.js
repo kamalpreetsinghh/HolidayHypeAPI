@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
       let flightDetails = {}
 
       result.forEach(flight => {
-        const { id, name, from, to, departureTiming, landingTiming, totalTiming, date, fare, type, imageUrl } = flight
-        flightDetails = { id, name, from, to, departureTiming, landingTiming, totalTiming, date, fare, type, imageUrl }
+        const { id, name, departureTiming, landingTiming, totalTiming, date, fare, type, imageUrl } = flight
+        flightDetails = { id, name, departureTiming, landingTiming, totalTiming, date, fare, type, imageUrl }
 
         flights.push(flightDetails)
       });
@@ -21,9 +21,9 @@ router.get('/', (req, res) => {
 
 router.post('/insert', (req, res) => {
 
-        const flightDocument = new Flight({ name: req.body.name, from: req.body.from, to: req.body.to, 
+        const flightDocument = new Flight({ name: req.body.name, flightNumber: req.body.flightNumber,
             departureTiming: req.body.departureTiming , landingTiming: req.body.landingTiming, totalTiming: req.body.totalTiming, 
-            date: req.body.date, fare: req.body.fare, type: req.body.type, imageUrl: req.body.imageUrl })
+            fare: req.body.fare, stops: req.body.stops, imageUrl: req.body.imageUrl })
     
         flightDocument.save()
 
