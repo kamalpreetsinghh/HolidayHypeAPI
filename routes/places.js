@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 
       result.forEach(place => {
         const { id, placeName, country, placeImage, placesToVisitImages, description } = place
-        placeDetails = { placeName, country, placeImage, placesToVisitImages, description }
+        placeDetails = { id, placeName, country, placeImage, placesToVisitImages, description }
 
         places.push(placeDetails)
       });
