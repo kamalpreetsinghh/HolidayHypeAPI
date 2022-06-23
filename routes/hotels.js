@@ -21,11 +21,12 @@ router.get('/', (req, res) => {
 
 router.post('/insert', (req, res) => {
 
-        const hotelDocument = new Hotel({ name: 'Holiday Inn', address: '30 Carlton Street, M5B 2E9 Toronto, Canada', 
-        description: 'This hotel is located next door to Maple Leaf Gardens in downtown Toronto. Guest rooms offer free WiFi.', 
-        price: 245, type: 'Inn', latitude: '56.67', longitude: '45.78', date: new Date(), numberOfRooms: 45, 
-        imageUrl: 'https://images.app.goo.gl/9nteXEtgDAMv5t9B9', phone: '877 660 8550', 
-        website: 'https://www.holidayinn.com/hotels/us/en/toronto/yyzct/hoteldetail' })
+        const hotelDocument = new Hotel({ name: req.body.name, address: req.body.address, 
+        description: req.body.description, price: req.body.price, type: req.body.type, 
+        latitude: req.body.latitude, longitude: req.body.longitude, date: req.body.date, 
+        numberOfRooms: req.body.numberOfRooms, 
+        imageUrl: req.body.imageUrl, phone: req.body.phone, 
+        website: req.body.website })
     
         hotelDocument.save()
 
