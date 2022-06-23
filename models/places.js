@@ -15,7 +15,7 @@ const placesSchema = new Schema({
         required: true
     },
     placesToVisitImages: {
-        type: String,
+        type: Array,
         required: true
     },
     description: {
