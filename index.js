@@ -1,6 +1,8 @@
 const restaurants = require('./routes/restaurants')
 const restrauntDetails = require('./routes/restaurantDetails')
 const flights = require('./routes/flights')
+const hotels = require('./routes/hotels')
+const hotelDetails = require('./routes/hotelDetails')
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
@@ -14,6 +16,8 @@ app.use(express.json())
 app.use('/api/restaurants', restaurants)
 app.use('/api/restaurantdetails', restrauntDetails)
 app.use('/api/flights', flights)
+app.use('/api/hotels', hotels)
+app.use('/api/hoteldetails', hotelDetails)
 
 // require('./startup/prod')()
 

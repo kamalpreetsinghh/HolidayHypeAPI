@@ -2,20 +2,22 @@ const Restaurant = require('../models/restaurant')
 const express = require('express')
 const router = express.Router()
 
-router.get('/', (req, res) => {
-  Restaurant.find()
+router.get('/:id', (req, res) => {
+  Restaurant.findById(req.params.id)
     .then((result) => {
-      let restaurants = []
-      let restrauntDetails = {}
-      result.forEach(restaurant => {
-        const {id, title, description, imgSrc, restaurantType, latitude, longitude, address, phone} = restaurant
-        restrauntDetails = {id, title, description, imgSrc, restaurantType, latitude, longitude, address, phone}
-        
-        restaurants.push(restrauntDetails)
-      });
-      res.send(restaurants)
+      if(result) {
+        let restrauntDetails = {}
+        const { id, title, description, imgSrc, restaurantType, latitude, longitude, address, phone } = result
+        restrauntDetails = { id, title, description, imgSrc, restaurantType, latitude, longitude, address, phone }
+        res.send(restrauntDetails)
+      } else {
+        res.sendStatus(404)
+      }
+      
     })
-    .catch((error) => console.log(error))
+    .catch((error) => {
+      console.log(error)
+    })
 })
 
 module.exports = router
