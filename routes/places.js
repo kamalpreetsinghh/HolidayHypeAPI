@@ -22,14 +22,17 @@ router.get('/', (req, res) => {
 
 router.post('/insert', (req, res) => {
 
+
     places.forEach(place => {
         let placesDocument = new Places({
             placeName: place.placeName,
-            country: place.country,
+            country: place.Country,
             description: place.description,
             placeImage: place.placeImage,
             placesToVisitImages: place.placesToVisitImages
         })
+
+        console.log(place)
 
         placesDocument.save()
     })
