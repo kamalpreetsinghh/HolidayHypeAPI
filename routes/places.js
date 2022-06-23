@@ -26,7 +26,7 @@ router.post('/insert', (req, res) => {
     // places.forEach(place => {
     //     let placesDocument = new Places({
     //         placeName: place.placeName,
-    //         country: place.Country,
+    //         country: place.country,
     //         description: place.description,
     //         placeImage: place.placeImage,
     //         placesToVisitImages: place.placesToVisitImages
