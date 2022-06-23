@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
       let placeDetails = {}
 
       result.forEach(place => {
-        const { placeName, country, placeImage, placesToVisitImages, description } = place
+        const { id, placeName, country, placeImage, placesToVisitImages, description } = place
         placeDetails = { placeName, country, placeImage, placesToVisitImages, description }
 
         places.push(placeDetails)
@@ -23,19 +23,19 @@ router.get('/', (req, res) => {
 router.post('/insert', (req, res) => {
 
 
-    places.forEach(place => {
-        let placesDocument = new Places({
-            placeName: place.placeName,
-            country: place.Country,
-            description: place.description,
-            placeImage: place.placeImage,
-            placesToVisitImages: place.placesToVisitImages
-        })
+    // places.forEach(place => {
+    //     let placesDocument = new Places({
+    //         placeName: place.placeName,
+    //         country: place.Country,
+    //         description: place.description,
+    //         placeImage: place.placeImage,
+    //         placesToVisitImages: place.placesToVisitImages
+    //     })
 
-        console.log(place)
+    //     console.log(place)
 
-        placesDocument.save()
-    })
+    //     placesDocument.save()
+    // })
 
     res.send("Data Saved Successfully")
 
