@@ -15,7 +15,7 @@ const hotelBookingSchema = new Schema({
         required: true
     },
     guestName: {
-        type: Number,
+        type: String,
         required: true
     },
     numberOfRooms: {
