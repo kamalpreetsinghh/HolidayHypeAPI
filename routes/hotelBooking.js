@@ -2,8 +2,8 @@ const HotelBooking = require('../models/hotelBooking')
 const express = require('express')
 const router = express.Router()
 
-router.get('/:id', (req, res) => {
-  Hotel.findById(req.params.id)
+router.get('/:userID/:hotelID', (req, res) => {
+  HotelBooking.findOne({ userID: req.params.userID, hotelID: req.params.hotelID })
     .then((result) => {
       if(result) {
 
