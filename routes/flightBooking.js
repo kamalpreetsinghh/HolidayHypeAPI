@@ -1,4 +1,6 @@
 const FlightBooking = require('../models/flightBooking')
+const pdfService = require('../services/pdf-service')
+const emailService = require('../services/email-service')
 const express = require('express');
 const router = express.Router();
 
@@ -28,8 +30,15 @@ router.post('/insert', (req, res) => {
         numberOfChildren: req.body.numberOfChildren, numberOfAdults: req.body.numberOfAdults })
 
     flightBookingDocument.save()
+      res.send('Data Saved Successfully')
+    
 
-res.send("Data Saved Successfully")
+    // const stream = res.writeHead(200, {
+    //   'Content-Type': 'application/pdf',
+    //   'Content-Disposition': `attachment;filename=invoice.pdf`,
+    // });
+
+    const invoice = pdfService.buildPDF(req.body).then((invoice) => emailService.sendEmail(invoice));
 
 })
 
