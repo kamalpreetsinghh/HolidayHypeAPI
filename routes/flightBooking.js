@@ -38,7 +38,7 @@ router.post('/insert', (req, res) => {
     //   'Content-Disposition': `attachment;filename=invoice.pdf`,
     // });
 
-    const invoice = pdfService.buildPDF(req.body).then((invoice) => emailService.sendEmail(invoice));
+    const invoice = pdfService.buildFlightPDF(req.body).then((invoice) => emailService.sendEmail(invoice));
 
 })
 

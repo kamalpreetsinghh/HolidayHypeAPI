@@ -1,4 +1,6 @@
 const HotelBooking = require('../models/hotelBooking')
+const pdfService = require('../services/pdf-service')
+const emailService = require('../services/email-service')
 const express = require('express')
 const router = express.Router()
 
@@ -29,6 +31,8 @@ router.post('/insert', (req, res) => {
         hotelBookingDocument.save()
 
   res.send("Data Saved Successfully")
+
+  pdfService.buildHotelPDF(req.body).then((invoice) => emailService.sendHotelEmail(invoice, req.body.email));
 
 })
 

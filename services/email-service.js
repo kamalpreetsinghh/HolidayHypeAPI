@@ -13,7 +13,7 @@ const sendEmail = async (attachment) => {
 
     await transporter.sendMail({
         attachments: [{
-            filename: 'invoice.pdf',
+            filename: 'ticket.pdf',
             content: attachment
         }],
         from: 'kamalpreetsiingh@gmail.com',
@@ -25,4 +25,30 @@ const sendEmail = async (attachment) => {
     .catch((error) => console.log(`Error While Sending Email ${error}`));
 }
 
-module.exports = { sendEmail }
+const sendHotelEmail = async (attachment, email) => {
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: "kamalpreetsiingh@gmail.com", 
+            pass: "yjsrserfbshslmuw", 
+        }
+      });
+
+    await transporter.sendMail({
+        attachments: [{
+            filename: 'Invoice.pdf',
+            content: attachment
+        }],
+        from: 'kamalpreetsiingh@gmail.com',
+        to: email,
+        subject: "Invoice for Hotel Booking",
+        text: "Dear Sir, PFA the attached invoice for your hotel booiking through Holiday Hype App",
+        html: ""
+    }).then(() => console.log('Email Sent'))
+    .catch((error) => console.log(`Error While Sending Email ${error}`));
+}
+
+
+module.exports = { sendEmail, sendHotelEmail }
