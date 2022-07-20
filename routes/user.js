@@ -19,12 +19,12 @@ router.get('/:id', (req, res) => {
 
 router.post('/insert', (req, res) => {
 
-    const userDocument = new User({ userID: req.body.userID, firstName: req.body.firstName, 
-    lastName: req.body.lastName, email: req.body.email, password: req.body.password })
+  const userDocument = new User({ userID: req.body.userID, firstName: req.body.firstName, 
+  lastName: req.body.lastName, email: req.body.email, password: req.body.password })
 
-    userDocument.save()
-      .then((result) => res.send(result))
-      .catch((error) => res.status(500).send(error.message))
+  userDocument.save()
+    .then((result) => res.send(result))
+    .catch((error) => res.status(500).send(error.message))
 })
 
 module.exports = router

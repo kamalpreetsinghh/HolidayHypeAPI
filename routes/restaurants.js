@@ -20,20 +20,44 @@ router.get('/', (req, res) => {
     .catch((error) => res.status(500).send(error.message))
 })
 
-// router.post('/insert', (req, res) => {
+router.post('/insert', (req, res) => {
 
-//   restaurants.forEach(restaurant => {
-//     const restaurantDocument = new Restaurant({ title, description, imgSrc, 
-//       restaurantType, latitude, longitude, address, phone } = restaurant)
+  // let images = [
+  //   "https://www.pexels.com/photo/blur-breakfast-chef-cooking-262978/", 
+  //   "https://www.pexels.com/photo/clear-wine-glass-on-table-67468/",
+  //   "https://www.pexels.com/photo/chef-preparing-vegetable-dish-on-tree-slab-1267320/",
+  //   "https://www.pexels.com/photo/white-and-brown-cooked-dish-on-white-ceramic-bowls-958545/",
+  //   "https://www.pexels.com/photo/clear-footed-glass-beside-bowl-370984/",
+  //   "https://www.pexels.com/photo/empty-dining-tables-and-chairs-1579739/",
+  //   "https://www.pexels.com/photo/view-of-empty-restaurant-239975/",
+  //   "https://www.pexels.com/photo/man-holding-drinking-glass-580613/",
+  //   "https://www.pexels.com/photo/cafe-store-facade-1322184/",
+  //   "https://www.pexels.com/photo/people-in-cafe-2788792/"
+  // ]
 
-//     restaurantDocument.save()
-//       .then((result) => console.log(result))
-//       .catch((error) => console.log(error))
-//   });
+  // let index = 0
+  // let imgSrc = ""
 
-//   res.send("Data Saved Successfully")
+  // restaurants.forEach(restaurant => {
+  //   imgSrc = images[index];
+  //   const { title, description, restaurantType, latitude, longitude, address, phone } = restaurant
 
-// })
+  //   const restaurantDocument = new Restaurant({ title, description, imgSrc, restaurantType, latitude, longitude, address, phone })
+
+  //   restaurantDocument.save()
+  //     .then((result) => console.log(result))
+  //     .catch((error) => console.log(error))
+
+  //     if(index > 9) {
+  //       index = 0;
+  //     } else {
+  //       index++;
+  //     }
+  // });
+
+  res.send("Data Saved Successfully")
+
+})
 
 router.post('/', (req, res) => {
   const restaurant = {

@@ -21,13 +21,13 @@ router.get('/', (req, res) => {
 
 router.post('/insert', (req, res) => {
 
-        const flightDocument = new Flight({ name: req.body.name, flightNumber: req.body.flightNumber,
-            departureTiming: req.body.departureTiming , landingTiming: req.body.landingTiming, totalTiming: req.body.totalTiming, 
-            fare: req.body.fare, stops: req.body.stops, imageUrl: req.body.imageUrl })
-    
-        flightDocument.save()
-        .then((result) => res.send(result))
-        .catch((error) => res.status(500).send(error.message))
+  const flightDocument = new Flight({ name: req.body.name, flightNumber: req.body.flightNumber,
+      departureTiming: req.body.departureTiming , landingTiming: req.body.landingTiming, totalTiming: req.body.totalTiming, 
+      fare: req.body.fare, stops: req.body.stops, imageUrl: req.body.imageUrl })
+
+  flightDocument.save()
+  .then((result) => res.send(result))
+  .catch((error) => res.status(500).send(error.message))
 })
 
 module.exports = router

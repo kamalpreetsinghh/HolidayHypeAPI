@@ -21,16 +21,16 @@ router.get('/', (req, res) => {
 
 router.post('/insert', (req, res) => {
 
-        const hotelDocument = new Hotel({ name: req.body.name, address: req.body.address, 
-        description: req.body.description, price: req.body.price, type: req.body.type, 
-        latitude: req.body.latitude, longitude: req.body.longitude, date: req.body.date, 
-        numberOfRooms: req.body.numberOfRooms, 
-        imageUrl: req.body.imageUrl, phone: req.body.phone, 
-        website: req.body.website })
-    
-        hotelDocument.save()
-        .then((result) => res.send(result))
-        .catch((error) => res.status(500).send(error.message))
+  const hotelDocument = new Hotel({ name: req.body.name, address: req.body.address, 
+  description: req.body.description, price: req.body.price, type: req.body.type, 
+  latitude: req.body.latitude, longitude: req.body.longitude, date: req.body.date, 
+  numberOfRooms: req.body.numberOfRooms, 
+  imageUrl: req.body.imageUrl, phone: req.body.phone, 
+  website: req.body.website })
+
+  hotelDocument.save()
+  .then((result) => res.send(result))
+  .catch((error) => res.status(500).send(error.message))
 })
 
 module.exports = router

@@ -23,17 +23,17 @@ router.get('/:id', (req, res) => {
 
 router.post('/insert', (req, res) => {
 
-    const flightBookingDocument = new FlightBooking({ flightID: req.body.flightID, flightName: req.body.flightName, flightTo: req.body.flightTo,
-        flightFrom: req.body.flightFrom, departureTiming: req.body.departureTiming , landingTiming: req.body.landingTiming, 
-        totalTiming: req.body.totalTiming, fare: req.body.fare, type: req.body.type, flightImage: req.body.flightImage, 
-        departureDate: req.body.departureDate, landingDate: req.body.landingDate, className: req.body.className, 
-        numberOfChildren: req.body.numberOfChildren, numberOfAdults: req.body.numberOfAdults })
+  const flightBookingDocument = new FlightBooking({ flightID: req.body.flightID, flightName: req.body.flightName, flightTo: req.body.flightTo,
+      flightFrom: req.body.flightFrom, departureTiming: req.body.departureTiming , landingTiming: req.body.landingTiming, 
+      totalTiming: req.body.totalTiming, fare: req.body.fare, type: req.body.type, flightImage: req.body.flightImage, 
+      departureDate: req.body.departureDate, landingDate: req.body.landingDate, className: req.body.className, 
+      numberOfChildren: req.body.numberOfChildren, numberOfAdults: req.body.numberOfAdults })
 
-    flightBookingDocument.save()
-      .then((result) => res.send(result))
-      .catch((error) => res.status(500).send(error.message))
-      
-    const invoice = pdfService.buildFlightPDF(req.body).then((invoice) => emailService.sendEmail(invoice));
+  flightBookingDocument.save()
+    .then((result) => res.send(result))
+    .catch((error) => res.status(500).send(error.message))
+    
+  const invoice = pdfService.buildFlightPDF(req.body).then((invoice) => emailService.sendEmail(invoice));
 
 })
 
