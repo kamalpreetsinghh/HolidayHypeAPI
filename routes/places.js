@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
       });
       res.send(places)
     })
-    .catch((error) => console.log(error))
+    .catch((error) => res.status(500).send(error.message))
 })
 
 router.post('/insert', (req, res) => {

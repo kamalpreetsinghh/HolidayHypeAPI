@@ -16,7 +16,7 @@ router.get('/', (req, res) => {
       });
       res.send(flights)
     })
-    .catch((error) => console.log(error))
+    .catch((error) => res.status(500).send(error.message))
 })
 
 router.post('/insert', (req, res) => {
@@ -26,9 +26,8 @@ router.post('/insert', (req, res) => {
             fare: req.body.fare, stops: req.body.stops, imageUrl: req.body.imageUrl })
     
         flightDocument.save()
-
-  res.send("Data Saved Successfully")
-
+        .then((result) => res.send(result))
+        .catch((error) => res.status(500).send(error.message))
 })
 
 module.exports = router

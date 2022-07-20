@@ -18,19 +18,19 @@ router.get('/:userID/:hotelID', (req, res) => {
         res.sendStatus(404)
       }
     })
-    .catch((error) => console.log(error))
+    .catch((error) => res.status(500).send(error.message))
 })
 
 router.post('/insert', (req, res) => {
 
-        const hotelBookingDocument = new HotelBooking({ name: req.body.name, email: req.body.email, 
-        phone: req.body.phone, guestName: req.body.guestName, numberOfRooms: req.body.numberOfRooms, 
-        userID: req.body.userID, hotelID: req.body.hotelID, hotelName: req.body.hotelName, 
-        cardNumber: req.body.cardNumber })
-    
-        hotelBookingDocument.save()
+  const hotelBookingDocument = new HotelBooking({ name: req.body.name, email: req.body.email, 
+  phone: req.body.phone, guestName: req.body.guestName, numberOfRooms: req.body.numberOfRooms, 
+  userID: req.body.userID, hotelID: req.body.hotelID, hotelName: req.body.hotelName, 
+  cardNumber: req.body.cardNumber })
 
-  res.send("Data Saved Successfully")
+  hotelBookingDocument.save()
+    .then((result) => res.send(result))
+    .catch((error) => res.status(500).send(error.message))
 
   pdfService.buildHotelPDF(req.body).then((invoice) => emailService.sendHotelEmail(invoice, req.body.email));
 

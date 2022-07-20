@@ -15,7 +15,7 @@ router.get('/:id', (req, res) => {
       }
       
     })
-    .catch((error) => console.log(error))
+    .catch((error) => res.status(500).send(error.message))
 })
 
 module.exports = router

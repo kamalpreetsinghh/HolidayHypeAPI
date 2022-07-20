@@ -14,7 +14,7 @@ router.get('/:id', (req, res) => {
             res.sendStatus(404)
         }
       })
-      .catch((error) => console.log(error))
+      .catch((error) => res.status(500).send(error.message))
 })
 
 router.post('/insert', (req, res) => {
@@ -23,9 +23,8 @@ router.post('/insert', (req, res) => {
     lastName: req.body.lastName, email: req.body.email, password: req.body.password })
 
     userDocument.save()
-
-res.send("Data Saved Successfully")
-
+      .then((result) => res.send(result))
+      .catch((error) => res.status(500).send(error.message))
 })
 
 module.exports = router

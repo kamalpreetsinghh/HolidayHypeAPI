@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
             res.sendStatus(404)
         }
       })
-      .catch((error) => console.log(error))
+      .catch((error) => res.status(500).send(error.message))
 })
 
 router.post('/insert', (req, res) => {
@@ -30,14 +30,9 @@ router.post('/insert', (req, res) => {
         numberOfChildren: req.body.numberOfChildren, numberOfAdults: req.body.numberOfAdults })
 
     flightBookingDocument.save()
-      res.send('Data Saved Successfully')
-    
-
-    // const stream = res.writeHead(200, {
-    //   'Content-Type': 'application/pdf',
-    //   'Content-Disposition': `attachment;filename=invoice.pdf`,
-    // });
-
+      .then((result) => res.send(result))
+      .catch((error) => res.status(500).send(error.message))
+      
     const invoice = pdfService.buildFlightPDF(req.body).then((invoice) => emailService.sendEmail(invoice));
 
 })
