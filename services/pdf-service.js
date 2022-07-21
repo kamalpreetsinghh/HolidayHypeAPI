@@ -1,13 +1,15 @@
-const PDFDocument = require('pdfkit');
+const PDFDocument = require("pdfkit");
 
 const buildFlightPDF = async (data) => {
-    const doc = new PDFDocument({ size: "A4", bufferPages: true, font: 'Courier' });
-    
-    doc.image('assets/airplane.jpg', 0, 0, {width: 620});
+  const doc = new PDFDocument({
+    size: "A4",
+    bufferPages: true,
+    font: "Courier",
+  });
 
-    doc
-      .fontSize(16)
-      .text(`
+  doc.image("assets/airplane.jpg", 0, 0, { width: 620 });
+
+  doc.fontSize(16).text(`
 
 
 
@@ -27,48 +29,54 @@ const buildFlightPDF = async (data) => {
       
       
       `);
-    
-    doc.end();
 
-    return doc;
-}
-
-const buildHotelPDF = async (data) => {
-  const doc = new PDFDocument({ size: "A4", bufferPages: true, font: 'Courier' });
-  
-  doc.image('assets/airplane.jpg', 0, 0, {width: 620});
-
-  doc
-    .fontSize(16)
-    .text(`
-
-
-
-
-
-
-
-
-Name: ${data.name}
-
-Hotel Name: ${data.hotelName}
-
-Guest Name: ${data.guestName}
-
-Check In Date and Time:  
-
-Check Out Date and Time:   
-
-Number of Rooms: ${data.numberOfRooms}
-
-    
-    
-    `);
-  
   doc.end();
 
   return doc;
-}
+};
+
+const buildHotelPDF = async (data, name, guest, numberOfRooms) => {
+  const doc = new PDFDocument({
+    size: "A4",
+    bufferPages: true,
+    font: "Courier",
+  });
+
+  doc.image("assets/airplane.jpg", 0, 0, { width: 620 });
+
+  doc.fontSize(14).text(`
+
+
+
+
+
+
+
+
+Name:               ${name}
+
+Guest Name:         ${guest}
+
+Hotel Name:         ${data.name}
+
+Hotel Address:      ${data.address}
+
+Contact Number:     ${data.phone}
+
+Check In Date:      ${data.date.toDateString()}
+
+Check Out Date:     ${data.date.toDateString()}
+
+Number of Rooms:    ${numberOfRooms}
+
+Price:              ${parseInt(numberOfRooms) * data.price}$
+    
+    
+    `);
+
+  doc.end();
+
+  return doc;
+};
 
 module.exports = { buildFlightPDF, buildHotelPDF };
-
