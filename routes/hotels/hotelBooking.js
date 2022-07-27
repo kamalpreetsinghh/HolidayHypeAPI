@@ -6,9 +6,9 @@ router.get("/:id", hotelsController.getHotelBookingByID);
 
 router.post("/insert", hotelsController.saveHotelBooking);
 
-router.put(":id", hotelsController.updateHotelBooking);
+router.put("/:id", hotelsController.updateHotelBooking);
 
-router.delete(":id", hotelsController.deleteHotelBooking);
+router.delete("/:id", hotelsController.deleteHotelBooking);
 
 router.get("/user/:userID", hotelsController.getHotelsByUserID);
 
