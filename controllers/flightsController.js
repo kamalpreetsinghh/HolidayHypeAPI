@@ -1,4 +1,5 @@
 const FlightBooking = require("../models/flightBooking");
+const Flight = require("../models/flight");
 const pdfService = require("../services/pdf-service");
 const emailService = require("../services/email-service");
 
