@@ -35,8 +35,8 @@ const sendHotelEmail = async (attachment, email) => {
     port: 587,
     secure: false, // true for 465, false for other ports
     auth: {
-      user: "holidayhypee@outlook.com",
-      pass: "Holidayhype",
+      user: process.env.EMAIL,
+      pass: process.env.PASSWORD,
     },
     tls: {
       ciphers: "SSLv3",
@@ -51,7 +51,7 @@ const sendHotelEmail = async (attachment, email) => {
           content: attachment,
         },
       ],
-      from: "holidayhypee@outlook.com",
+      from: process.env.EMAIL,
       to: email,
       subject: "Invoice for Hotel Booking",
       text: "Dear Sir, PFA the attached invoice for your hotel booiking through Holiday Hype App",

@@ -1,25 +1,22 @@
-const mongoose = require("mongoose");
+require("dotenv").config();
 const express = require("express");
 const app = express();
-require("dotenv").config();
-const restaurants = require("./routes/restaurants");
-const restrauntDetails = require("./routes/restaurantDetails");
-const flights = require("./routes/flights");
-const flightBooking = require("./routes/flightBooking");
-const hotels = require("./routes/hotels");
-const hotelDetails = require("./routes/hotelDetails");
-const hotelBooking = require("./routes/hotelBooking");
-const places = require("./routes/places");
-const user = require("./routes/user");
+const restaurants = require("./routes/restaurants/restaurants");
+const restrauntDetails = require("./routes/restaurants/restaurantDetails");
+const flights = require("./routes/flights/flights");
+const flightBooking = require("./routes/flights/flightBooking");
+const hotels = require("./routes/hotels/hotels");
+const hotelDetails = require("./routes/hotels/hotelDetails");
+const hotelBooking = require("./routes/hotels/hotelBooking");
+const places = require("./routes/places/places");
+const user = require("./routes/users/user");
+const connectDB = require("./config/dbConnection");
 
-const dbURL = process.env.DB_URL;
-
-mongoose
-  .connect(dbURL)
-  .then((result) => console.log("Connected to MongoDB"))
-  .catch((error) => console.log(error));
+connectDB();
 
 app.use(express.json());
+
+// Routes
 app.use("/api/restaurants", restaurants);
 app.use("/api/restaurantdetails", restrauntDetails);
 app.use("/api/flights", flights);
