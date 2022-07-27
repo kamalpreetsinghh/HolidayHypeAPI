@@ -59,11 +59,11 @@ const saveHotelBooking = async (req, res) => {
 
     const result2 = await Hotel.findByIdAndUpdate(
       req.body.hotelID,
-      { numberOfRooms: result2.numberOfRooms - req.body.numberOfRooms },
+      { numberOfRooms: req.body.numberOfHotelRooms },
       { runValidators: true }
     );
     if (result2) {
-      await pdfService.buildHotelPDF(
+      const doc = await pdfService.buildHotelPDF(
         result2,
         req.body.name,
         req.body.guestName,
@@ -73,6 +73,7 @@ const saveHotelBooking = async (req, res) => {
       emailService.sendHotelEmail(doc, req.body.email);
     }
   } catch (error) {
+    console.log(error);
     res.status(500).send(error.message);
   }
 };
