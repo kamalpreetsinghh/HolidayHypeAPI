@@ -57,7 +57,11 @@ const saveHotelBooking = async (req, res) => {
     const result = await hotelBookingDocument.save();
     res.send(result);
 
-    const result2 = await Hotel.findById(req.body.hotelID);
+    const result2 = await Hotel.findByIdAndUpdate(
+      req.body.hotelID,
+      { numberOfRooms: req.body.numberOfRooms },
+      { runValidators: true }
+    );
     if (result2) {
       await pdfService.buildHotelPDF(
         result2,
