@@ -59,7 +59,7 @@ const saveHotelBooking = async (req, res) => {
 
     const result2 = await Hotel.findByIdAndUpdate(
       req.body.hotelID,
-      { numberOfRooms: req.body.numberOfRooms },
+      { numberOfRooms: result2.numberOfRooms - req.body.numberOfRooms },
       { runValidators: true }
     );
     if (result2) {
