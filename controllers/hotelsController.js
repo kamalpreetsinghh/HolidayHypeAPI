@@ -98,7 +98,6 @@ const updateHotelBooking = async (req, res) => {
 const deleteHotelBooking = async (req, res) => {
   try {
     const result = await HotelBooking.deleteOne(req.params);
-    console.log(req.params);
     res.send(result);
   } catch (error) {
     console.log(error);

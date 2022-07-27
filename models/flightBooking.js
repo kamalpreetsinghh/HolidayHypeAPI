@@ -18,22 +18,6 @@ const flightBookingSchema = new Schema({
     type: String,
     required: true,
   },
-  departureTiming: {
-    type: String,
-    required: true,
-  },
-  landingTiming: {
-    type: String,
-    required: true,
-  },
-  totalTiming: {
-    type: String,
-    required: true,
-  },
-  fare: {
-    type: String,
-    required: true,
-  },
   type: {
     type: String,
     required: true,
