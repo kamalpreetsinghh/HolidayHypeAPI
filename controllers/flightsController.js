@@ -26,7 +26,7 @@ const saveFlight = async (req, res) => {
 
 const updateFlightBooking = async (req, res) => {
   try {
-    const result = await Flight.findOneAndUpdate(req.params, req.body, {
+    const result = await FlightBooking.findOneAndUpdate(req.params, req.body, {
       new: true,
       runValidators: true,
     });
@@ -39,7 +39,7 @@ const updateFlightBooking = async (req, res) => {
 
 const deleteFlightBooking = async (req, res) => {
   try {
-    const result = await Flight.deleteOne(req.params);
+    const result = await FlightBooking.deleteOne(req.params);
     res.send(result);
   } catch (error) {
     console.log(error);
