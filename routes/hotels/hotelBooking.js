@@ -8,7 +8,7 @@ router.post("/insert", hotelsController.saveHotelBooking);
 
 router.put("/:id", hotelsController.updateHotelBooking);
 
-router.delete("/:id", hotelsController.deleteHotelBooking);
+router.delete("/:_id", hotelsController.deleteHotelBooking);
 
 router.get("/user/:userID", hotelsController.getHotelsByUserID);
 

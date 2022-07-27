@@ -80,10 +80,14 @@ const saveHotelBooking = async (req, res) => {
 
 const updateHotelBooking = async (req, res) => {
   try {
-    const result = await HotelBooking.findOneAndUpdate(req.params, req.body, {
-      new: true,
-      runValidators: true,
-    });
+    const result = await HotelBooking.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
     res.send(result);
   } catch (error) {
     console.log(error);
@@ -94,6 +98,7 @@ const updateHotelBooking = async (req, res) => {
 const deleteHotelBooking = async (req, res) => {
   try {
     const result = await HotelBooking.deleteOne(req.params);
+    console.log(req.params);
     res.send(result);
   } catch (error) {
     console.log(error);
