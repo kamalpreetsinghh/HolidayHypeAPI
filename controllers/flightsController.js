@@ -24,29 +24,6 @@ const saveFlight = async (req, res) => {
   }
 };
 
-const updateFlightBooking = async (req, res) => {
-  try {
-    const result = await FlightBooking.findOneAndUpdate(req.params, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    res.send(result);
-  } catch (error) {
-    console.log(error);
-    res.status(400).send(error.message);
-  }
-};
-
-const deleteFlightBooking = async (req, res) => {
-  try {
-    const result = await FlightBooking.deleteOne(req.params);
-    res.send(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send(error.message);
-  }
-};
-
 const getFlightBookingByID = async (req, res) => {
   try {
     const result = await FlightBooking.findById(req.params.id);
@@ -74,11 +51,49 @@ const saveFlightBooking = async (req, res) => {
   }
 };
 
+const updateFlightBooking = async (req, res) => {
+  try {
+    const result = await FlightBooking.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error.message);
+  }
+};
+
+const deleteFlightBooking = async (req, res) => {
+  try {
+    const result = await FlightBooking.deleteOne(req.params);
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
+};
+
+const getFlightsByUserID = async (req, res) => {
+  try {
+    const result = await FlightBooking.find(req.params);
+    res.send(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   getFlights,
   saveFlight,
+  getFlightsByUserID,
+  getFlightBookingByID,
   updateFlightBooking,
   deleteFlightBooking,
-  getFlightBookingByID,
   saveFlightBooking,
 };

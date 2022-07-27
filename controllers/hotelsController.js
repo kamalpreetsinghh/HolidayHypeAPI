@@ -38,7 +38,7 @@ const getHotelByID = async (req, res) => {
 
 const getHotelBookingByID = async (req, res) => {
   try {
-    const result = await HotelBooking.findOne(req.params);
+    const result = await HotelBooking.findById(req.params.id);
 
     if (result) {
       res.send(result);
@@ -73,10 +73,45 @@ const saveHotelBooking = async (req, res) => {
   }
 };
 
+const updateHotelBooking = async (req, res) => {
+  try {
+    const result = await HotelBooking.findOneAndUpdate(req.params, req.body, {
+      new: true,
+      runValidators: true,
+    });
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(400).send(error.message);
+  }
+};
+
+const deleteHotelBooking = async (req, res) => {
+  try {
+    const result = await HotelBooking.deleteOne(req.params);
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error.message);
+  }
+};
+
+const getHotelsByUserID = async (req, res) => {
+  try {
+    const result = await HotelBooking.find(req.params);
+    res.send(result);
+  } catch (error) {
+    res.status(500).send(error.message);
+  }
+};
+
 module.exports = {
   getHotels,
   saveHotel,
   getHotelByID,
   getHotelBookingByID,
   saveHotelBooking,
+  updateHotelBooking,
+  deleteHotelBooking,
+  getHotelsByUserID,
 };

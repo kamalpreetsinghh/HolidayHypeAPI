@@ -8,6 +8,8 @@ router.post("/insert", flightsController.saveFlightBooking);
 
 router.put("/:id", flightsController.updateFlightBooking);
 
-router.delete("/:id", flightsController.deleteFlightBooking);
+router.delete("/:_id", flightsController.deleteFlightBooking);
+
+router.get("/user/:userID", flightsController.getFlightsByUserID);
 
 module.exports = router;
