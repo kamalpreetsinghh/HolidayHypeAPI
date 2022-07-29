@@ -26,7 +26,9 @@ const saveFlight = async (req, res) => {
 
 const getFlightBookingByID = async (req, res) => {
   try {
-    const result = await FlightBooking.findById(req.params.id);
+    const result = await FlightBooking.findById(req.params.id).populate(
+      "flightID"
+    );
     if (result) {
       res.send(result);
     } else {

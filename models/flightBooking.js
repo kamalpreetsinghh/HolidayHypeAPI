@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 const flightBookingSchema = new Schema({
   flightID: {
-    type: String,
+    type: mongoose.Types.ObjectId,
+    ref: "Flight",
     required: true,
   },
   userID: {
