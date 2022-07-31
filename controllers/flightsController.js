@@ -83,7 +83,7 @@ const deleteFlightBooking = async (req, res) => {
 
 const getFlightsByUserID = async (req, res) => {
   try {
-    const result = await FlightBooking.find(req.params);
+    const result = await FlightBooking.find(req.params).populate("flightID");
     res.send(result);
   } catch (error) {
     res.status(500).send(error.message);
