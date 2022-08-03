@@ -1,5 +1,6 @@
 const FlightBooking = require("../models/flightBooking");
 const Flight = require("../models/flight");
+const User = require("../models/user");
 const pdfService = require("../services/pdf-service");
 const emailService = require("../services/email-service");
 
@@ -46,8 +47,15 @@ const saveFlightBooking = async (req, res) => {
     const result = await flightBookingDocument.save();
     res.send(result);
 
-    const doc = pdfService.buildFlightPDF(req.body);
-    emailService.sendEmail(doc);
+    const result2 = await Flight.findById(req.body.flightID);
+
+    const result3 = await User.findOne({ userID: req.body.userID });
+
+    if (result2 && result3) {
+      const doc = await pdfService.buildFlightPDF(req.body, result2, result3);
+
+      emailService.sendEmail(doc, result3.email, "Flight");
+    }
   } catch (error) {
     res.status(400).send(error.message);
   }

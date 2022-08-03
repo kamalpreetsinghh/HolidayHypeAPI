@@ -1,6 +1,6 @@
 const PDFDocument = require("pdfkit");
 
-const buildFlightPDF = async (data) => {
+const buildFlightPDF = async (data, flight, user) => {
   const doc = new PDFDocument({
     size: "A4",
     bufferPages: true,
@@ -16,16 +16,30 @@ const buildFlightPDF = async (data) => {
 
 
 
+  Name:           ${user.firstName} ${user.lastName}
+  
+  Flight Name:    ${flight.name}
 
-  Flight Name: ${data.flightName}
+  From:           ${data.flightFrom}   
+  
+  To:             ${data.flightTo}
 
-  From: ${data.flightFrom}   To: ${data.flightTo}
+  Type:           ${data.type}
 
-  Departure Date and Time: ${data.departureDate}  ${data.departureTiming} 
+  Class:          ${data.className}
 
-  Arrival Date and Time:   ${data.landingDate}  ${data.landingTiming}
+  Children:       ${data.numberOfChildren}
 
-  Fare: ${data.fare}$
+  Adults:         ${data.numberOfAdults}
+
+  Departure Date: ${data.departureDate}  ${flight.departureTiming}
+
+  Arrival Date:   ${data.landingDate}  ${flight.landingTiming}
+
+  Fare:           ${
+    parseInt(data.numberOfAdults) * flight.fare +
+    (parseInt(data.numberOfChildren) * flight.fare) / 2
+  }$
       
       
       `);
@@ -45,6 +59,7 @@ const buildHotelPDF = async (data, name, guest, numberOfRooms) => {
   doc.image("assets/airplane.jpg", 0, 0, { width: 620 });
 
   doc.fontSize(14).text(`
+
 
 
 

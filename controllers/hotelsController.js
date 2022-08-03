@@ -70,7 +70,7 @@ const saveHotelBooking = async (req, res) => {
         req.body.numberOfRooms
       );
 
-      emailService.sendHotelEmail(doc, req.body.email);
+      emailService.sendEmail(doc, req.body.email, "Hotel");
     }
   } catch (error) {
     console.log(error);
