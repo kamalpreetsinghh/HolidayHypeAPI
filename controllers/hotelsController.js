@@ -107,7 +107,11 @@ const deleteHotelBooking = async (req, res) => {
 
 const getHotelsByUserID = async (req, res) => {
   try {
-    const result = await HotelBooking.find(req.params);
+    const result = await HotelBooking.find(req.params).populate(
+      "hotelID",
+      "_id imageUrl"
+    );
+
     res.send(result);
   } catch (error) {
     res.status(500).send(error.message);
