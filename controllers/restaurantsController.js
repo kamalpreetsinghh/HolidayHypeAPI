@@ -15,7 +15,12 @@ const getRestaurantByID = async (req, res) => {
     if (result) {
       res.send(result);
     } else {
-      res.sendStatus(404);
+      res
+        .status(404)
+        .send({
+          success: false,
+          message: "Restaurant with the give id was not found.",
+        });
     }
   } catch (error) {
     res.status(500).send(error.message);

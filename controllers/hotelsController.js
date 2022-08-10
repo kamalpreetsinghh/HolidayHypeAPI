@@ -29,7 +29,10 @@ const getHotelByID = async (req, res) => {
     if (result) {
       res.send(result);
     } else {
-      res.sendStatus(404);
+      res.status(404).send({
+        success: false,
+        message: "The hotel with the give id was not found.",
+      });
     }
   } catch (error) {
     res.status(500).send(error.message);
@@ -43,7 +46,12 @@ const getHotelBookingByID = async (req, res) => {
     if (result) {
       res.send(result);
     } else {
-      res.sendStatus(404);
+      res
+        .status(404)
+        .send({
+          success: false,
+          message: "The hotel booking with the given id was not found",
+        });
     }
   } catch (error) {
     res.status(500).send(error.message);

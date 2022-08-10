@@ -10,7 +10,10 @@ const getUser = async (req, res) => {
 
       res.send(userDetails);
     } else {
-      res.sendStatus(404);
+      res.status(404).send({
+        success: false,
+        message: "The user with the given id was not found",
+      });
     }
   } catch (error) {
     res.status(500).send(error.message);
